@@ -67,6 +67,7 @@ struct RegistrationView: View {
             }
             
             
+            
             //Button
             
             Button {

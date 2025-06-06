@@ -66,6 +66,7 @@ struct RegistrationView: View {
                 InputField(text: $comfirmpassword, label: "パスワード(確認用)", placeholder: "もう一度入力してください", isSecureField: true)
             }
             
+            
             //Button
             
             Button {

@@ -2,7 +2,6 @@
 //  ListView.swift
 //  MyTest
 //
-//  Created by 田端悠之介 on 2025/03/22.
 //
 
 import SwiftUI

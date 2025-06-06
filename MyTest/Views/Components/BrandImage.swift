@@ -2,7 +2,6 @@
 //  BrandImage.swift
 //  MyTest
 //
-//  Created by 田端悠之介 on 2025/06/04.
 //
 
 import SwiftUI

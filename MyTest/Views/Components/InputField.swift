@@ -2,7 +2,6 @@
 //  InputField.swift
 //  MyTest
 //
-//  Created by 田端悠之介 on 2025/06/05.
 //
 
 import SwiftUI

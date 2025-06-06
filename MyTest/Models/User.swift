@@ -2,7 +2,6 @@
 //  User.swift
 //  MyTest
 //
-//  Created by 田端悠之介 on 2025/03/27.
 //
 
 import Foundation

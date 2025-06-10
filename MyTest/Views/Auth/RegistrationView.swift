@@ -68,21 +68,8 @@ struct RegistrationView: View {
             
             
             //Button
-            
-            Button {
-                print("ログインボタンをタップしました")
-                
-            } label: {
-                HStack {
-                    Text("登録")
-                    Image(systemName: "arrow.right")
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .fontWeight(.bold)
-                .foregroundStyle(.white)
-                .background(Color(.red))
-                .clipShape(Capsule())
+            BasicButton(label: "登録", icon: "arrow.right") {
+                print("登録ボタンがタップされました")
             }
             .padding(.top, 24)
             

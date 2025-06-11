@@ -9,13 +9,41 @@ import FirebaseAuth
 
 class AuthViewModel {
     
-    //Login
+    var userSession: FirebaseAuth.User?
+    
+    //MARK: Initalizer
+    init () {
+        self.userSession = Auth.auth().currentUser
+        print("\(self.userSession?.email)")
+    }
+    
+    //MARK: Login
+    func login(email: String, password: String) async {
+        do {
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            print("ログイン成功: \(result.user.email)")
+            
+        }catch {
+            print("ログイン失敗: \(error.localizedDescription)")
+            
+        }
+        
+    }
     
     
-    //Logout
+    //MARK: Logout
+    func logput() {
+        do {
+            try Auth.auth().signOut()
+            print("ログアウト成功")
+            
+        }catch {
+            print("ログアウト失敗: \(error.localizedDescription)")
+        }
+    }
     
     
-    //Create Account
+    //MARK: Create Account
     
     func createAccount(email: String, password: String) async {
 //        Auth.auth().createUser(withEmail: email, password: password)
@@ -45,7 +73,7 @@ class AuthViewModel {
     }
     
     
-    //Delete Account
+    //MARK: Delete Account
     
 }
 

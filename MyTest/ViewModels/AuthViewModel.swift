@@ -14,7 +14,7 @@ class AuthViewModel {
     //MARK: Initalizer
     init () {
         self.userSession = Auth.auth().currentUser
-        print("\(self.userSession?.email)")
+        print("ログインユーザー: \(self.userSession?.email)")
     }
     
     //MARK: Login

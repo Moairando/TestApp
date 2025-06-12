@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let authViewModel = AuthViewModel()
+    @ObservedObject var authViewModel = AuthViewModel()
     
     var body: some View {
         Group {
@@ -16,7 +16,7 @@ struct ContentView: View {
                 ListView()
                 
             } else {
-                LoginView()
+                LoginView(authViewModel: authViewModel)
                 
             }
         }

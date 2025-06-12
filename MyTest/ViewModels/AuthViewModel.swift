@@ -15,9 +15,12 @@ class AuthViewModel: ObservableObject {
     init () {
         self.userSession = Auth.auth().currentUser
         print("ログインユーザー: \(self.userSession?.email)")
+        
+        logout()
     }
     
     //MARK: Login
+    @MainActor
     func login(email: String, password: String) async {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
@@ -34,7 +37,7 @@ class AuthViewModel: ObservableObject {
     
     
     //MARK: Logout
-    func logput() {
+    func logout() {
         do {
             try Auth.auth().signOut()
             print("ログアウト成功")

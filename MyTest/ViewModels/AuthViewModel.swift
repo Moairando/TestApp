@@ -6,6 +6,7 @@
 
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
 
 class AuthViewModel: ObservableObject {
     
@@ -50,13 +51,16 @@ class AuthViewModel: ObservableObject {
     
     
     //MARK: Create Account
-    
-    func createAccount(email: String, password: String) async {
+    @MainActor
+    func createAccount(email: String, password: String, name: String, age: Int) async {
         
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             print("ユーザー登録成功: \(result.user.email)")
             self.userSession = result.user
+            
+            let newUser = User(id: result.user.uid, name: name, email: email, age: age)
+            await uploadUserData(withUser: newUser)
             
         }catch {
             print("ユーザー登録失敗: \(error.localizedDescription)")
@@ -69,6 +73,22 @@ class AuthViewModel: ObservableObject {
     
     
     //MARK: Delete Account
+    
+    
+    //MARK: Upload User Data
+    private func uploadUserData(withUser user: User) async {
+        
+        do {
+            let UserData = try Firestore.Encoder().encode(user)
+            try await Firestore.firestore().collection("users").document(user.id).setData(UserData)
+            print("データ保存成功")
+            
+        }catch {
+            print("データ保存失敗: \(error.localizedDescription)")
+        }
+        
+        
+    }
     
 }
 

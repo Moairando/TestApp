@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 class ListViewModel {
     
@@ -12,6 +13,9 @@ class ListViewModel {
     
     init() {
         self.users = getMockUsers()
+        Task {
+            await fetchUsers()
+        }
     }
     
     private var currentIndex: Int = 0
@@ -27,6 +31,23 @@ class ListViewModel {
             User.MOCK_USER7
         ]
     }
+    
+    //Download Users Data
+    private func fetchUsers() async {
+        do {
+            let snapshot = try await Firestore.firestore().collection("users").getDocuments()
+            
+            for document in snapshot.documents {
+                let user = try document.data(as: User.self)
+                print("user: \(user)")
+            }
+            
+        } catch {
+            print("ユーザーデータ取得失敗\(error.localizedDescription)")
+        }
+        
+    }
+    
     
     func adjustIndex(isRedo: Bool) {
         if isRedo {

@@ -7,14 +7,17 @@
 import Foundation
 import FirebaseFirestore
 
-class ListViewModel {
+class ListViewModel: ObservableObject {
     
-    var users = [User]()
+    @Published var users = [User]()
     
+    @MainActor
     init() {
-        self.users = getMockUsers()
+//        self.users = getMockUsers()
+        
         Task {
-            await fetchUsers()
+            self.users = await fetchUsers()
+            print("self.users: \(self.users)")
         }
     }
     
@@ -33,17 +36,20 @@ class ListViewModel {
     }
     
     //Download Users Data
-    private func fetchUsers() async {
+    private func fetchUsers() async -> [User] {
         do {
             let snapshot = try await Firestore.firestore().collection("users").getDocuments()
+            var tempUsers = [User]()
             
             for document in snapshot.documents {
                 let user = try document.data(as: User.self)
-                print("user: \(user)")
+                tempUsers.append(user)
             }
+            return tempUsers
             
         } catch {
             print("ユーザーデータ取得失敗\(error.localizedDescription)")
+            return []
         }
         
     }

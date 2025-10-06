@@ -11,18 +11,32 @@ struct ListView: View {
     @ObservedObject private var viewModel = ListViewModel()
     
     var body: some View {
-        VStack(spacing: 0) {
-            
-            //Cards
-            cards
-            
-            
-            //Actions
-            actions
-            
+        Group {
+            if viewModel.users.count > 0 {
+                VStack(spacing: 0) {
+                    
+                    //Cards
+                    cards
+                    
+                    
+                    //Actions
+                    actions
+                    
+                }
+                .background(.black, in: RoundedRectangle(cornerRadius: 15))
+                .padding(.horizontal, 6)
+            } else {
+                ProgressView()
+                    .padding()
+                    .tint(Color.white)
+                    .background(Color.gray)
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                    .scaleEffect(1.5)
+            }
         }
-        .background(.black, in: RoundedRectangle(cornerRadius: 15))
-        .padding(.horizontal, 6)
+        
+        
+        
     }
 }
 

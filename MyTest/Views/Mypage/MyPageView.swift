@@ -12,44 +12,11 @@ struct MyPageView: View {
         List {
             
             //User info
-            Section {
-                HStack(spacing: 16) {
-                    Image("SwiftUI Firebase Course Avatar")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 48, height: 48)
-                        .clipShape(Circle())
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("ブルー")
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                        
-                        Text("blue@example.com")
-                            .font(.footnote)
-                            .tint(.gray)
-                        
-                    }
-                }
-            }
+            userinfo
             
             //System info
             Section("一般") {
-                HStack (spacing: 16) {
-                    Image(systemName: "gear")
-                        .imageScale(.large)
-                        .foregroundStyle(.gray)
-                    
-                    Text("バージョン")
-                        .font(.subheadline)
-                        .foregroundStyle(.black)
-                    
-                    Spacer()
-                    
-                    Text("1.0.0")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                }
+                MyPageRow(iconName: "gear", label: "バージョン", tintColor: .gray, value: "1.0.0")
             }
             
             //Navigation
@@ -57,46 +24,22 @@ struct MyPageView: View {
                 Button {
                     
                 }label: {
-                    HStack (spacing: 16) {
-                        Image(systemName: "square.and.pencil.circle.fill")
-                            .imageScale(.large)
-                            .foregroundStyle(.red)
-                        
-                        Text("プロフィール変更")
-                            .font(.subheadline)
-                            .foregroundStyle(.black)
-                        
-                    }
+                    MyPageRow(iconName: "square.and.pencil.circle.fill", label: "プロフィール変更", tintColor: .red)
+                    
                 }
                 
                 Button {
                     
                 }label: {
-                    HStack (spacing: 16) {
-                        Image(systemName: "arrow.left.circle.fill")
-                            .imageScale(.large)
-                            .foregroundStyle(.red)
-                        
-                        Text("ログアウト")
-                            .font(.subheadline)
-                            .foregroundStyle(.black)
-                        
-                    }
+                    
+                    MyPageRow(iconName: "arrow.left.circle.fill", label: "ログアウト", tintColor: .red)
                 }
                 
                 Button {
                     
                 }label: {
-                    HStack (spacing: 16) {
-                        Image(systemName: "xmark.circle.fill")
-                            .imageScale(.large)
-                            .foregroundStyle(.red)
-                        
-                        Text("アカウント削除")
-                            .font(.subheadline)
-                            .foregroundStyle(.black)
-                        
-                    }
+                    MyPageRow(iconName: "xmark.circle.fill", label: "アカウント削除", tintColor: .red)
+                    
                 }
             }
             
@@ -106,4 +49,30 @@ struct MyPageView: View {
 
 #Preview {
     MyPageView()
+}
+
+
+extension MyPageView {
+    private var userinfo: some View {
+        Section {
+            HStack(spacing: 16) {
+                Image("SwiftUI Firebase Course Avatar")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 48, height: 48)
+                    .clipShape(Circle())
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("ブルー")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                    
+                    Text("blue@example.com")
+                        .font(.footnote)
+                        .tint(.gray)
+                    
+                }
+            }
+        }
+    }
 }

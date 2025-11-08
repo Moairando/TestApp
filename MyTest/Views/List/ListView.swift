@@ -13,18 +13,34 @@ struct ListView: View {
     var body: some View {
         Group {
             if viewModel.users.count > 0 {
-                VStack(spacing: 0) {
-                    
-                    //Cards
-                    cards
-                    
-                    
-                    //Actions
-                    actions
-                    
+                NavigationStack {
+                    VStack(spacing: 0) {
+                        
+                        //Cards
+                        cards
+                        
+                        
+                        //Actions
+                        actions
+                        
+                    }
+                    .background(.black, in: RoundedRectangle(cornerRadius: 15))
+                    .padding(.horizontal, 6)
+                    .toolbar {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            NavigationLink {
+                                MyPageView()
+                            } label: {
+                                Image("SwiftUI Firebase Course Avatar")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 32, height: 32)
+                                    .clipShape(.circle)
+                            }
+                        }
+                    }
                 }
-                .background(.black, in: RoundedRectangle(cornerRadius: 15))
-                .padding(.horizontal, 6)
+                .tint(.primary)
             } else {
                 ProgressView()
                     .padding()
@@ -34,9 +50,6 @@ struct ListView: View {
                     .scaleEffect(1.5)
             }
         }
-        
-        
-        
     }
 }
 

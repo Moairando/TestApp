@@ -9,7 +9,8 @@ import SwiftUI
 struct RegistrationView: View {
     
     //private let authViewModel = AuthViewModel()
-    let authViewModel: AuthViewModel
+//    let authViewModel: AuthViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State private var email = ""
     @State private var name = ""
@@ -23,45 +24,15 @@ struct RegistrationView: View {
         VStack {
             
             //Image
-            BrandImage()
+            BrandImage(size: .large)
             
             //Form
             VStack(spacing: 24) {
                 InputField(text: $email, label: "メールアドレス", placeholder: "入力してください")
                 
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("お名前")
-                        .foregroundStyle(Color(.darkGray))
-                        .fontWeight(.semibold)
-                        .font(.footnote)
-                    TextField("入力してください", text: $name)
-                    Divider()
-                }
+                InputField(text: $name, label: "お名前", placeholder: "入力してください")
                 
-                
-                VStack(alignment: .leading, spacing: 12) {
-                    HStack {
-                        Text("年齢")
-                            .foregroundStyle(Color(.darkGray))
-                            .fontWeight(.semibold)
-                            .font(.footnote)
-                        
-                        Spacer()
-                        
-                        Picker(selection: $age) {
-                            ForEach(18..<100) {num in
-                                Text("\(num)")
-                                    .tag(num)
-                            }
-                        } label: {
-                            Text("年齢")
-                        }
-                        .tint(.black)
-                        
-                    }
-                    
-                    Divider()
-                }
+               PickerField(selection: $age, title: "年齢")
                 
                 InputField(text: $password, label: "パスワード", placeholder: "半角英数字6文字以上", isSecureField: true)
                 
@@ -103,5 +74,5 @@ struct RegistrationView: View {
 }
 
 #Preview {
-    RegistrationView(authViewModel: AuthViewModel())
+    RegistrationView()
 }

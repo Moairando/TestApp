@@ -11,20 +11,6 @@ struct ListView: View {
     @ObservedObject private var viewModel = ListViewModel()
     
     var body: some View {
-<<<<<<< Updated upstream
-        VStack(spacing: 0) {
-            
-            //Cards
-            cards
-            
-            
-            //Actions
-            actions
-            
-        }
-        .background(.black, in: RoundedRectangle(cornerRadius: 15))
-        .padding(.horizontal, 6)
-=======
         NavigationStack {
             Group {
                 if viewModel.users.count > 0 {
@@ -69,7 +55,7 @@ struct ListView: View {
             }
         }
         .tint(.primary)
->>>>>>> Stashed changes
+
     }
 }
 

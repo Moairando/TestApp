@@ -16,10 +16,11 @@ struct ContentView: View {
                 ListView()
                 
             } else {
-                LoginView(authViewModel: authViewModel)
+                LoginView()
                 
             }
         }
+        .environmentObject(authViewModel)
     }
 }
 

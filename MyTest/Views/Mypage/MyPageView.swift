@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MyPageView: View {
+    
+    @State private var showEditProfileView = false
+    
     var body: some View {
         List {
             
@@ -22,6 +25,7 @@ struct MyPageView: View {
             //Navigation
             Section("アカウント") {
                 Button {
+                    showEditProfileView.toggle()
                     
                 }label: {
                     MyPageRow(iconName: "square.and.pencil.circle.fill", label: "プロフィール変更", tintColor: .red)
@@ -43,6 +47,9 @@ struct MyPageView: View {
                 }
             }
             
+        }
+        .sheet(isPresented: $showEditProfileView) {
+            EditProfileView()
         }
     }
 }

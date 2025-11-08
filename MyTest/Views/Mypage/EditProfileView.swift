@@ -15,6 +15,8 @@ struct EditProfileView: View {
     @State var age = 18
     @State var message = ""
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         
         
@@ -27,14 +29,14 @@ struct EditProfileView: View {
                 // Edit field
                 editField
                 
-                
+                 
             }
             .navigationTitle("プロフィール変更")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("キャンセル") {
-                        
+                        dismiss()
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {

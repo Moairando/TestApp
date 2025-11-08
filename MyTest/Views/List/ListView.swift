@@ -11,6 +11,7 @@ struct ListView: View {
     @ObservedObject private var viewModel = ListViewModel()
     
     var body: some View {
+
         NavigationStack {
             Group {
                 if viewModel.users.count > 0 {

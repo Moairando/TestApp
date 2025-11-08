@@ -23,7 +23,7 @@ struct RegistrationView: View {
         VStack {
             
             //Image
-            BrandImage()
+            BrandImage(size: .large)
             
             //Form
             VStack(spacing: 24) {

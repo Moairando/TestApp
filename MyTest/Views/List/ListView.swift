@@ -11,7 +11,6 @@ struct ListView: View {
     @ObservedObject private var viewModel = ListViewModel()
     
     var body: some View {
-<<<<<<< Updated upstream
         VStack(spacing: 0) {
             
             //Cards
@@ -24,7 +23,6 @@ struct ListView: View {
         }
         .background(.black, in: RoundedRectangle(cornerRadius: 15))
         .padding(.horizontal, 6)
-=======
         NavigationStack {
             Group {
                 if viewModel.users.count > 0 {

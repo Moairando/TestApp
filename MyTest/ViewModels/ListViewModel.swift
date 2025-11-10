@@ -17,7 +17,6 @@ class ListViewModel: ObservableObject {
         
         Task {
             self.users = await fetchUsers()
-            print("self.users: \(self.users)")
         }
     }
     

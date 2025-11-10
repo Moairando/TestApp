@@ -11,12 +11,16 @@ import FirebaseFirestore
 class AuthViewModel: ObservableObject {
     
     @Published var userSession: FirebaseAuth.User?
+    @Published var currentUser: User?
     
     //MARK: Initalizer
     init () {
         self.userSession = Auth.auth().currentUser
         print("ログインユーザー: \(self.userSession?.email)")
         
+        Task {
+            await self.fetchCurrentUser()
+        }
         
     }
     
@@ -27,7 +31,6 @@ class AuthViewModel: ObservableObject {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             print("ログイン成功: \(result.user.email)")
             self.userSession = result.user
-            print("self.userSession: \(self.userSession?.email)")
             
         }catch {
             print("ログイン失敗: \(error.localizedDescription)")
@@ -66,8 +69,6 @@ class AuthViewModel: ObservableObject {
             print("ユーザー登録失敗: \(error.localizedDescription)")
         }
         
-        
-        
         print("アカウント確認画面から呼び出されました")
     }
     
@@ -86,7 +87,23 @@ class AuthViewModel: ObservableObject {
         }catch {
             print("データ保存失敗: \(error.localizedDescription)")
         }
+    }
+    
+    //Fetch Current User
+    @MainActor
+    private func fetchCurrentUser() async {
         
+        guard let uid = self.userSession?.uid else { return }
+        
+        do {
+            let snapShot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+            self.currentUser = try snapShot.data(as: User.self)
+            print("カレントユーザー取得成功: \(self.currentUser)")
+            
+        }catch {
+            
+            print("カレントユーザー取得失敗: \(error.localizedDescription)")
+        }
         
     }
     

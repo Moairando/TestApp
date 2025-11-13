@@ -10,6 +10,7 @@ import PhotosUI
 
 struct EditProfileView: View {
     
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State var selectedImage: PhotosPickerItem? = nil
     @State var name = ""
     @State var age = 18
@@ -41,7 +42,17 @@ struct EditProfileView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("変更") {
-                        
+                        Task {
+                            
+                            guard let currentUser = authViewModel.currentUser else { return }
+                            
+                            await authViewModel.updateUserProfile(
+                                withId: currentUser.id,
+                                name: name,
+                                age: age,
+                                message: message
+                            )
+                        }
                     }
                 }
             }
